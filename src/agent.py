@@ -1,7 +1,16 @@
-def main():
-    print("Hello! I am your basic AI Agent.")
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
 
-if __name__ == "__main__":
-    main()
-    
+load_dotenv()
 
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+)
+
+response = client.responses.create(
+    model="gpt-4.1-mini",
+    input="Explain artificial intelligence in simple words."
+)
+
+print(response.output_text)
