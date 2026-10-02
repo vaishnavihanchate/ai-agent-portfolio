@@ -1,0 +1,12 @@
+@startuml C4-Context
+
+title Multi-Agent Game Strategy - System Context
+
+actor Player
+
+rectangle "Multi-Agent Game Strategy System" as System
+
+Player --> System : Provides game objective\nand game state
+System --> Player : Returns recommended\nstrategy / game action
+
+@enduml

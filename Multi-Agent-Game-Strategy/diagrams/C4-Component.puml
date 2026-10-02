@@ -1,0 +1,18 @@
+@startuml C4-Component
+
+title Multi-Agent Game Strategy - Coordinator Agent Components
+
+rectangle "Coordinator Agent" {
+
+    rectangle "Game State Manager" as State
+    rectangle "Strategy Decision Manager" as Decision
+    rectangle "Agent Communication Manager" as Communication
+    rectangle "Action Selection Manager" as Action
+}
+
+State --> Decision : Provides game state
+Decision --> Communication : Communicates agent tasks
+Communication --> Action : Provides agent decisions
+Action --> Decision : Returns action evaluation
+
+@enduml
