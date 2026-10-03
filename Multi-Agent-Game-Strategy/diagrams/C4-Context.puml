@@ -4,9 +4,16 @@ title Multi-Agent Game Strategy - System Context
 
 actor Player
 
-rectangle "Multi-Agent Game Strategy System" as System
+rectangle "Multi-Agent Game Strategy System" as System {
+    rectangle "BFS / DFS Search" as Search
+    rectangle "Agent Coordinator" as Agent
+}
 
-Player --> System : Provides game objective\nand game state
-System --> Player : Returns recommended\nstrategy / game action
+rectangle "Game Environment" as Environment
+
+Player --> System : Provides game input
+System --> Environment : Reads game state
+Environment --> System : Returns game state
+System --> Player : Returns result
 
 @enduml

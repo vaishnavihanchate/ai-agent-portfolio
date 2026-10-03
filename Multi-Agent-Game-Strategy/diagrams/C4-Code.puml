@@ -1,0 +1,47 @@
+@startuml C4-Code
+
+title Multi-Agent Game Strategy - Code Level
+
+skinparam classAttributeIconSize 0
+
+class BFS_Module {
+    +bfs(graph, start, target)
+    +visited
+    +queue
+}
+
+class DFS_Module {
+    +dfs(graph, start, target)
+    +visited
+    +stack
+}
+
+class Graph_Module {
+    +create_graph(n)
+    +graph
+}
+
+class Agent_Module {
+    +select_search()
+    +search_strategy
+}
+
+class SLE2_Module {
+    +run_bfs()
+    +run_dfs()
+    +measure_performance()
+}
+
+Graph_Module --> BFS_Module : provides graph
+Graph_Module --> DFS_Module : provides graph
+
+Agent_Module --> BFS_Module : selects BFS
+Agent_Module --> DFS_Module : selects DFS
+
+SLE2_Module --> BFS_Module : executes BFS
+SLE2_Module --> DFS_Module : executes DFS
+
+BFS_Module --> SLE2_Module : returns result
+DFS_Module --> SLE2_Module : returns result
+
+@enduml

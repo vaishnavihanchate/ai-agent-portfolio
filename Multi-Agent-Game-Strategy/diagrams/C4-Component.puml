@@ -1,18 +1,24 @@
 @startuml C4-Component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-title Multi-Agent Game Strategy - Coordinator Agent Components
+LAYOUT_WITH_LEGEND()
 
-rectangle "Coordinator Agent" {
+title Multi-Agent Game Strategy - Component Level
 
-    rectangle "Game State Manager" as State
-    rectangle "Strategy Decision Manager" as Decision
-    rectangle "Agent Communication Manager" as Communication
-    rectangle "Action Selection Manager" as Action
+Container_Boundary(searchEngine, "Search Engine") {
+
+    Component(frontier, "Frontier Manager", "Python", "Manages BFS queue and DFS stack")
+
+    Component(visited, "Visited Manager", "Python", "Tracks visited nodes")
+
+    Component(goal, "Goal Test", "Python", "Checks whether target is reached")
+
+    Component(path, "Path Manager", "Python", "Builds the final path")
 }
 
-State --> Decision : Provides game state
-Decision --> Communication : Communicates agent tasks
-Communication --> Action : Provides agent decisions
-Action --> Decision : Returns action evaluation
+Rel(frontier, visited, "Checks visited nodes")
+Rel(frontier, goal, "Checks target")
+Rel(goal, path, "Provides result")
+Rel(visited, frontier, "Prevents repeated visits")
 
 @enduml

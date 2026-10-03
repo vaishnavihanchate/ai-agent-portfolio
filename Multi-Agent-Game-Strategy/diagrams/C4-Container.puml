@@ -1,25 +1,27 @@
 @startuml C4-Container
 
-title Multi-Agent Game Strategy - Container Diagram
+title Multi-Agent Game Strategy - Container Level
 
 actor Player
 
-rectangle "Multi-Agent Game Strategy System" {
+rectangle "Multi-Agent Game Strategy System" as System {
 
-    rectangle "Game Input Module" as Input
-    rectangle "Coordinator Agent" as Coordinator
-    rectangle "Strategy Agent" as Strategy
-    rectangle "Action Agents" as Action
-    rectangle "Game Engine" as Engine
+    rectangle "Input Module" as Input
+
+    rectangle "Agent Coordinator" as Agent
+
+    rectangle "Search Engine" as Search
+
+    rectangle "Visited Memory" as Memory
+
+    rectangle "Output Module" as Output
 }
 
-Player --> Input : Provides game objective\nand game state
-Input --> Coordinator : Sends game information
-Coordinator --> Strategy : Requests strategy
-Strategy --> Coordinator : Returns strategy
-Coordinator --> Action : Assigns actions
-Action --> Engine : Executes game action
-Engine --> Coordinator : Returns updated game state
-Coordinator --> Player : Returns recommended action
+Player --> Input : Provides game / maze input
+Input --> Agent : Sends problem details
+Agent --> Search : Selects BFS / DFS
+Search --> Memory : Tracks visited nodes
+Search --> Output : Returns search result
+Output --> Player : Displays result
 
 @enduml
